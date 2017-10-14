@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Agenda Android</string>
+    <string name="action_settings">Settings</string>
+    <string name="nombre_label">Nombre</string>
+    <string name="correo_label">Correo</string>
+    <string name="edad_label">Edad</string>
+    <string name="telefono_label">Telefono</string>
+    <string name="direccion_label">Dirección</string>
+    <string name="btn_guardar_label">Guardar</string>
+    <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="dynamic_data">{value}</string>
+    <string name="info_persona">Informacion de persona</string>
+
+    <string-array name="opciones_archivo">
+        <item>Seleccione una opción</item>
+        <item>Json</item>
+        <item>Sax</item>
+        <item>Dom</item>
+    </string-array>
+
+</resources>
