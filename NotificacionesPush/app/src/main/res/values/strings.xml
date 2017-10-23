@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NotificacionesPush</string>
+    <string name="tema_notificacion">TemaNotificaciones</string>
+</resources>

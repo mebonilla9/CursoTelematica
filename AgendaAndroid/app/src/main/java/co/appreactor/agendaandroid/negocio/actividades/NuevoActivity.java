@@ -8,15 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.IOException;
-import java.util.List;
-
 import co.appreactor.agendaandroid.R;
+import co.appreactor.agendaandroid.modelo.dao.PersonaDao;
 import co.appreactor.agendaandroid.modelo.entidades.Persona;
-import co.appreactor.agendaandroid.modelo.servicio.ArchivadorJson;
-import co.appreactor.agendaandroid.modelo.servicio.IGestorArchivo;
 import co.appreactor.agendaandroid.negocio.util.AlertaUtil;
-import co.appreactor.agendaandroid.negocio.util.FormatoUtil;
 
 public class NuevoActivity extends AppCompatActivity {
 
@@ -27,7 +22,8 @@ public class NuevoActivity extends AppCompatActivity {
     private TextInputLayout txtNombre;
     private Button btnGuardar;
 
-    private IGestorArchivo gestorArchivo;
+    //private IGestorArchivo gestorArchivo;
+
 
     private DialogInterface.OnClickListener confirmarGuardar;
 
@@ -42,15 +38,15 @@ public class NuevoActivity extends AppCompatActivity {
         this.txtTelefono = (TextInputLayout) findViewById(R.id.txtTelefono);
         this.txtEdad = (TextInputLayout) findViewById(R.id.txtEdad);
         // Adquirir el formato seleccionado por configuración
-        gestorArchivo = FormatoUtil.retornarFormato(NuevoActivity.this);
+        //gestorArchivo = FormatoUtil.retornarFormato(NuevoActivity.this);
         asignarEventos();
     }
 
-    private void asignarEventos(){
+    private void asignarEventos() {
         confirmarGuardar = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(NuevoActivity.this,MainActivity.class));
+                startActivity(new Intent(NuevoActivity.this, MainActivity.class));
             }
         };
 
@@ -62,27 +58,29 @@ public class NuevoActivity extends AppCompatActivity {
         });
     }
 
-    private void guardarPersona(){
-        try {
-            Persona personaGuardar = new Persona();
-            personaGuardar.setNombre(this.txtNombre.getEditText().getText().toString());
-            personaGuardar.setCorreo(this.txtCorreo.getEditText().getText().toString());
-            personaGuardar.setDireccion(this.txtDireccion.getEditText().getText().toString());
-            personaGuardar.setTelefono(this.txtTelefono.getEditText().getText().toString());
-            personaGuardar.setEdad(this.txtEdad.getEditText().getText().toString());
+    private void guardarPersona() {
+        //try {
+        Persona personaGuardar = new Persona();
+        personaGuardar.setNombre(this.txtNombre.getEditText().getText().toString());
+        personaGuardar.setCorreo(this.txtCorreo.getEditText().getText().toString());
+        personaGuardar.setDireccion(this.txtDireccion.getEditText().getText().toString());
+        personaGuardar.setTelefono(this.txtTelefono.getEditText().getText().toString());
+        personaGuardar.setEdad(this.txtEdad.getEditText().getText().toString());
 
-            List<Persona> listaPersonas = gestorArchivo.leer();
+        //List<Persona> listaPersonas = gestorArchivo.leer();
 
-            listaPersonas.add(personaGuardar);
+        //listaPersonas.add(personaGuardar);
 
-            gestorArchivo.escribir(listaPersonas);
+        //gestorArchivo.escribir(listaPersonas);
 
-            AlertaUtil.mostrarAlerta("Guardar Persona",
-                    "Se ha guardado la informacion de una nueva persona",
-                    confirmarGuardar, null, NuevoActivity.this
-            );
-        } catch(IOException e){
+        new PersonaDao(NuevoActivity.this).insertar(personaGuardar);
+
+        AlertaUtil.mostrarAlerta("Guardar Persona",
+                "Se ha guardado la informacion de una nueva persona",
+                confirmarGuardar, null, NuevoActivity.this
+        );
+        /*} catch(IOException e){
             e.printStackTrace(System.err);
-        }
+        }*/
     }
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Persona implements Serializable {
 
+    private Long id;
     private String nombre;
     private String correo;
     private String telefono;
@@ -53,5 +54,13 @@ public class Persona implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

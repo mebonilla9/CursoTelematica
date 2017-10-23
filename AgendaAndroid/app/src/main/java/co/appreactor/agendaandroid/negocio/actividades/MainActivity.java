@@ -22,24 +22,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.appreactor.agendaandroid.R;
+import co.appreactor.agendaandroid.modelo.dao.PersonaDao;
 import co.appreactor.agendaandroid.modelo.entidades.Persona;
-import co.appreactor.agendaandroid.modelo.servicio.ArchivadorJson;
-import co.appreactor.agendaandroid.modelo.servicio.IGestorArchivo;
 import co.appreactor.agendaandroid.negocio.adaptadores.AdaptadorPersona;
-import co.appreactor.agendaandroid.negocio.util.AlertaUtil;
-import co.appreactor.agendaandroid.negocio.util.FormatoUtil;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
-    private android.support.design.widget.TextInputLayout txtBuscar;
-    private android.widget.ListView lstPersonas;
+    private TextInputLayout txtBuscar;
+    private ListView lstPersonas;
 
     // Atributos para solicitud de permisos en tiempo de ejecucion
     private final int codigoPermiso = 666;
@@ -47,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    private IGestorArchivo gestorArchivo;
+    //private IGestorArchivo gestorArchivo;
     private List<Persona> listaPersonas;
     private List<Persona> listaTemporal;
 
@@ -68,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         asignarEventos();
         // Adquirir el formato seleccionado por configuración
-        gestorArchivo = FormatoUtil.retornarFormato(MainActivity.this);
+        //gestorArchivo = FormatoUtil.retornarFormato(MainActivity.this);
     }
 
     @Override
@@ -98,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void llenarLista() {
         try {
-            this.listaPersonas = this.gestorArchivo.leer();
+            //this.listaPersonas = this.gestorArchivo.leer();
+            this.listaPersonas = new PersonaDao(MainActivity.this).consultar();
             AdaptadorPersona adaptador = new AdaptadorPersona(
                     listaPersonas, MainActivity.this);
             this.lstPersonas.setAdapter(adaptador);
@@ -126,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Evento click sostendido para los items de la lista
-        this.lstPersonas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        /*this.lstPersonas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 posicionEliminar = position;
@@ -135,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         clickEliminar, null, MainActivity.this);
                 return true;
             }
-        });
+        });*/
 
         // Evento click para confirmar eliminacion
         this.clickEliminar = new DialogInterface.OnClickListener() {
@@ -165,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void eliminarPersona() {
-        try {
+        /*try {
             if (this.listaTemporal != null){
                 Persona personaTemporal = this.listaTemporal.get(posicionEliminar);
                 for (Persona personaBuscar : this.listaPersonas){
@@ -181,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             llenarLista();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private void filtrarLista(CharSequence s) {
