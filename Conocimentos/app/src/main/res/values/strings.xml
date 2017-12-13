@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Conocimentos</string>
+    <string name="descripcion_splash_ic">Icono de lanzamiento de aplicación</string>
+    <string name="title_activity_main">Conocimientos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_registrar">RegistrarActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

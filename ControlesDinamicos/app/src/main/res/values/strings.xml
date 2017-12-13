@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ControlesDinamicos</string>
+    <string name="numero_de_componentes">Numero de componentes</string>
+    <string name="generar">Generar</string>
+</resources>
