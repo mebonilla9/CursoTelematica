@@ -62,6 +62,13 @@ public class PreguntaAdapter extends RecyclerView.Adapter<PreguntaAdapter.ViewHo
             }
         });
 
+        holder.cvPregunta.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+
     }
 
     public void asignarPreguntas(List<Pregunta> listaPreguntas){

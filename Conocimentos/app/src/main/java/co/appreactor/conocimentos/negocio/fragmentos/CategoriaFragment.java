@@ -25,7 +25,7 @@ import co.appreactor.conocimentos.persistencia.servicio.CategoriaTestService;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoriaFragment extends Fragment {
+public class CategoriaFragment extends Fragment{
 
     /**
      * Representar a las categorias obtenidas del web service
