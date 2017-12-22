@@ -1,6 +1,8 @@
 package co.appreactor.conocimentos.negocio.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -81,6 +83,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // validar que el item de menu seleccionado no sea el de mapas (ArcGis)
+        if (id == R.id.miMapas){
+            startActivity(new Intent(MainActivity.this, MapsActivity.class));
+            return true;
+        }
+
         // FragmentoUtil
         FragmentoUtil.obtenerFragmento(
                 id,
@@ -101,6 +109,14 @@ public class MainActivity extends AppCompatActivity
      */
     public void activarBotonFlotante(boolean activo) {
         this.fab.setVisibility(activo ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * metodo de acceso para el boton flotante de la main activity en los fragmentos
+     * @return
+     */
+    public FloatingActionButton getFab(){
+        return this.fab;
     }
 
     /**

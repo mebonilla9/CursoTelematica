@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/miMapas"
+            android:icon="@drawable/ic_map_marker"
+            android:title="ArcGis" />
+        <item
             android:id="@+id/miCategorias"
             android:icon="@drawable/ic_category"
             android:checkable="true"

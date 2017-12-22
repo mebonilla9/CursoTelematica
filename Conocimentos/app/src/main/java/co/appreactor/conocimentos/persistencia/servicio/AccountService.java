@@ -8,6 +8,7 @@ import java.io.IOException;
 import co.appreactor.conocimentos.negocio.actividades.RegistrarActivity;
 import co.appreactor.conocimentos.persistencia.entidades.Account;
 import co.appreactor.conocimentos.persistencia.servicio.call.AccountCall;
+import co.appreactor.conocimentos.persistencia.servicio.serviciobase.GenericoService;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;

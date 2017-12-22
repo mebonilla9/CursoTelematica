@@ -12,6 +12,7 @@ import co.appreactor.conocimentos.negocio.fragmentos.CategoriaFragment;
 import co.appreactor.conocimentos.negocio.util.PreferenciasUtil;
 import co.appreactor.conocimentos.persistencia.entidades.Categoria;
 import co.appreactor.conocimentos.persistencia.servicio.call.CategoriaTestCall;
+import co.appreactor.conocimentos.persistencia.servicio.serviciobase.GenericoService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,6 +1,7 @@
 package co.appreactor.conocimentos.negocio.fragmentos;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import java.util.List;
 import co.appreactor.conocimentos.R;
 import co.appreactor.conocimentos.negocio.actividades.MainActivity;
 import co.appreactor.conocimentos.negocio.adaptadores.PreguntaAdapter;
+import co.appreactor.conocimentos.negocio.util.AlertaUtil;
 import co.appreactor.conocimentos.persistencia.entidades.Categoria;
 import co.appreactor.conocimentos.persistencia.servicio.CategoriaTestService;
 
@@ -25,7 +27,7 @@ import co.appreactor.conocimentos.persistencia.servicio.CategoriaTestService;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoriaFragment extends Fragment{
+public class CategoriaFragment extends Fragment {
 
     /**
      * Representar a las categorias obtenidas del web service
@@ -41,6 +43,9 @@ public class CategoriaFragment extends Fragment{
     private RecyclerView rvPreguntas;
 
     private PreguntaAdapter adaptador;
+
+    private boolean eliminar;
+    private int indiceSeleccionado;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,7 +83,7 @@ public class CategoriaFragment extends Fragment{
 
         ((MainActivity) getActivity()).activarBotonFlotante(false);
 
-        ((MainActivity) getActivity()).modificarTituloSubtitulo("Preguntas","Preguntas por categoria");
+        ((MainActivity) getActivity()).modificarTituloSubtitulo("Preguntas", "Preguntas por categoria");
     }
 
     private void asignarEventos() {
@@ -134,6 +139,39 @@ public class CategoriaFragment extends Fragment{
                         categorias
                 )
         );
+
+        if (eliminar) {
+            categoriaSeleccionada = this.categorias.get(indiceSeleccionado);
+            adaptador.asignarPreguntas(categoriaSeleccionada.getPreguntaTest());
+            eliminar = false;
+        }
     }
+
+    /**
+     * Permite recibir los datos de respuesta del web service para decirle al fragmento que hacer
+     * despues de la eliminacion de una pregunta
+     *
+     * @param mensaje mensaje de respuesta del servidor
+     */
+    public void procesarEliminacionPregunta(String mensaje) {
+        AlertaUtil.mostrarAlerta("Eliminación de pregunta",
+                "El registro ha sido eliminado",
+                restaurarEliminacion,
+                null,
+                getActivity()
+        );
+    }
+
+    private DialogInterface.OnClickListener restaurarEliminacion = new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            eliminar = true;
+            // guardar el indice selecciondo del spinner
+            indiceSeleccionado = spCategorias.getSelectedItemPosition() - 1;
+            // recargar la lista de las categorias
+            consultarCategorias();
+        }
+    };
 
 }

@@ -13,6 +13,7 @@ public class Pregunta implements Serializable {
     private Long CategoriaTestId;
     private String Pregunta;
     private Boolean Estado;
+    private Long Id;
 
     // Coleccion que representa a las respuestas de la pregunta
 
@@ -57,5 +58,13 @@ public class Pregunta implements Serializable {
 
     public void setRespuestaTest(List<Respuesta> respuestaTest) {
         RespuestaTest = respuestaTest;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 }

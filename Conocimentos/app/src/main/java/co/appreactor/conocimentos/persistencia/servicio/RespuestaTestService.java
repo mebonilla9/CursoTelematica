@@ -12,6 +12,7 @@ import co.appreactor.conocimentos.negocio.fragmentos.PreguntaFragment;
 import co.appreactor.conocimentos.negocio.util.PreferenciasUtil;
 import co.appreactor.conocimentos.persistencia.entidades.Respuesta;
 import co.appreactor.conocimentos.persistencia.servicio.call.RespuestaTestCall;
+import co.appreactor.conocimentos.persistencia.servicio.serviciobase.GenericoService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

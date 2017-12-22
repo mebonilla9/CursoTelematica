@@ -1,6 +1,7 @@
 package co.appreactor.conocimentos.negocio.adaptadores;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -14,8 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.appreactor.conocimentos.R;
+import co.appreactor.conocimentos.negocio.util.AlertaUtil;
 import co.appreactor.conocimentos.negocio.util.FragmentoUtil;
+import co.appreactor.conocimentos.persistencia.dto.EliminarPreguntaDto;
 import co.appreactor.conocimentos.persistencia.entidades.Pregunta;
+import co.appreactor.conocimentos.persistencia.servicio.PreguntaTestService;
 
 /**
  * Created by lord_nightmare on 6/12/17.
@@ -25,6 +29,9 @@ public class PreguntaAdapter extends RecyclerView.Adapter<PreguntaAdapter.ViewHo
 
     private Context contexto;
     private List<Pregunta> dataSet;
+
+    private EliminarPreguntaDto preguntaEliminar;
+
 
     public PreguntaAdapter(Context contexto) {
         this.contexto = contexto;
@@ -50,7 +57,7 @@ public class PreguntaAdapter extends RecyclerView.Adapter<PreguntaAdapter.ViewHo
             public void onClick(View v) {
                 // asignacion de los argumentos que se van a enviar al siguiente fragmento
                 Bundle argumentos = new Bundle();
-                argumentos.putSerializable("pregunta",pregunta);
+                argumentos.putSerializable("pregunta", pregunta);
 
                 // navegacion al fragmento que muestra las respuestas de la pregunta
                 FragmentoUtil.obtenerFragmento(
@@ -62,16 +69,38 @@ public class PreguntaAdapter extends RecyclerView.Adapter<PreguntaAdapter.ViewHo
             }
         });
 
+        /**
+         * El evento long click permitira eliminar una pregunta de la base de datos y refrescar la lista
+         */
         holder.cvPregunta.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                // convertir a atributo de clase la pregunta que se va a a eliminar
+
+                preguntaEliminar = new EliminarPreguntaDto();
+                preguntaEliminar.setId(pregunta.getPreguntaTestId());
+
+                AlertaUtil.mostrarAlerta("Eliminar pregunta",
+                        "Esta seguro de eliminar la pregunta?",
+                        clickEliminar,
+                        null,
+                        contexto
+                );
                 return true;
             }
         });
 
     }
 
-    public void asignarPreguntas(List<Pregunta> listaPreguntas){
+
+    private DialogInterface.OnClickListener clickEliminar = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            new PreguntaTestService(contexto).eliminarPregunta(preguntaEliminar);
+        }
+    };
+
+    public void asignarPreguntas(List<Pregunta> listaPreguntas) {
         // borrar todos los valores del dataset
         dataSet.clear();
         dataSet.addAll(listaPreguntas);

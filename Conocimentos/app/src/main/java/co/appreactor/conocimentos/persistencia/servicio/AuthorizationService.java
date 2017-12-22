@@ -6,6 +6,7 @@ import android.widget.Toast;
 import co.appreactor.conocimentos.negocio.actividades.LoginActivity;
 import co.appreactor.conocimentos.persistencia.dto.TokenDto;
 import co.appreactor.conocimentos.persistencia.servicio.call.AuthorizationCall;
+import co.appreactor.conocimentos.persistencia.servicio.serviciobase.GenericoService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
